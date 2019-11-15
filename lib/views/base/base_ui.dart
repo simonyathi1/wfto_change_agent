@@ -1,5 +1,4 @@
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:wfto_change_agent/models/user.dart';
 import 'package:wfto_change_agent/reources/strings_resource.dart';
@@ -8,7 +7,6 @@ import 'package:wfto_change_agent/utils/widget_util.dart';
 import 'package:wfto_change_agent/views/currentChallenge/challengesScreen.dart';
 import 'package:wfto_change_agent/views/drawer/about_us.dart';
 import 'package:wfto_change_agent/views/drawer/privacy.dart';
-import 'package:wfto_change_agent/views/drawer/settings.dart';
 import 'package:wfto_change_agent/views/sign_in/google_sign_in.dart';
 import 'package:wfto_change_agent/views/user/userDashboard.dart';
 //import 'package:sqflite/sqlite_api.dart';
@@ -107,9 +105,7 @@ class BaseUIState extends State<BaseUI> {
         MaterialPageRoute(builder: (BuildContext context) => PrivacyPolicy()));
   }
 
-  Future <GoogleSignInScreen> _signOut()  async{
-
-
+  Future<GoogleSignInScreen> _signOut() async {
     return new GoogleSignInScreen();
   }
 
@@ -117,8 +113,7 @@ class BaseUIState extends State<BaseUI> {
     Navigator.pushReplacement(
       context,
       new MaterialPageRoute(
-          builder: (context) => new GoogleSignInScreen(signOut: true)
-      ),
+          builder: (context) => new GoogleSignInScreen(signOut: true)),
     );
   }
 
