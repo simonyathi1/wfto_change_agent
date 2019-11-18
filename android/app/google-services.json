@@ -15,14 +15,6 @@
       },
       "oauth_client": [
         {
-          "client_id": "546003744959-s1lr0829sf3ubtfgeqn65pvrkaru8oqk.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "za.co.fidelitech.wfto_change_agent",
-            "certificate_hash": "2df8880835ceafc8206dbdaad7d027654e308547"
-          }
-        },
-        {
           "client_id": "546003744959-d2kpdd448jbuovrvng3evi7qc420h5pc.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -31,8 +23,12 @@
           }
         },
         {
-          "client_id": "546003744959-cog84t927k1lsav1ddl3t00cvt0aq117.apps.googleusercontent.com",
-          "client_type": 3
+          "client_id": "546003744959-s1lr0829sf3ubtfgeqn65pvrkaru8oqk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "za.co.fidelitech.wfto_change_agent",
+            "certificate_hash": "2df8880835ceafc8206dbdaad7d027654e308547"
+          }
         }
       ],
       "api_key": [
