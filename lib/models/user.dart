@@ -12,7 +12,7 @@ class User {
   int _points;
   String _userEmail;
   String _activitiesDone;
-  String _activityStatus;
+  String _challengeStatus;
   String _currentActivityStartTime;
   String _currentActivitySubmissionTime;
 
@@ -59,7 +59,7 @@ class User {
 
   String get activitiesDone => _activitiesDone;
 
-  String get activityStatus => _activityStatus;
+  String get challengeStatus => _challengeStatus;
 
 
   String get currentActivityStartTime => _currentActivityStartTime;
@@ -115,8 +115,8 @@ class User {
     _activitiesDone = value;
   }
 
-  set activityStatus(String value) {
-    _activityStatus = value;
+  set challengeStatus(String value) {
+    _challengeStatus = value;
   }
 
   Map<String, dynamic> toMap() {
@@ -136,7 +136,7 @@ class User {
     map["points"] = _points;
     map["user_email"] = _userEmail;
     map["activities_done"] = _activitiesDone;
-    map["activity_status"] = _activityStatus;
+    map["challenge_status"] = _challengeStatus;
     map["current_activity_start_time"] = _currentActivityStartTime;
     map["current_activity_submission_time"] = _currentActivitySubmissionTime;
 
@@ -155,7 +155,7 @@ class User {
     this._points = map["points"];
     this._userEmail = map["user_email"];
     this._activitiesDone = map["activities_done"];
-    this._activityStatus = map["activity_status"];
+    this._challengeStatus = map["challenge_status"];
     this._currentActivityStartTime = map["current_activity_start_time"];
     this._currentActivitySubmissionTime = map["current_activity_submission_time"];
   }
@@ -174,5 +174,5 @@ class User {
         this._activitiesDone = snapShot["activities_done"],
         this._currentActivityStartTime = snapShot["current_activity_start_time"],
         this._currentActivitySubmissionTime = snapShot["current_activity_submission_time"],
-        this._activityStatus = snapShot["activity_status"];
+        this._challengeStatus = snapShot["challenge_status"];
 }

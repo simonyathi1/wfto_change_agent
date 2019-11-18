@@ -133,6 +133,11 @@ class _AttemptActivityScreenState extends State<AttemptActivityScreen>
                   style: TextStyle(
                       color: Colors.white.withOpacity(0.6), fontSize: 18.0),
                 ),
+                Text(
+                  activity.hourAllocation.toString() + " Hours",
+                  style: TextStyle(
+                      color: Colors.white.withOpacity(0.6), fontSize: 18.0),
+                ),
                 SizedBox(height: 16.0),
 
                 Text(
@@ -164,7 +169,7 @@ class _AttemptActivityScreenState extends State<AttemptActivityScreen>
                       color: Colors.white.withOpacity(0.6), fontSize: 18.0),
                 ),
                 user.currentActivityStatus == "none" ||
-                        user.currentActivityStatus == "started"||
+                    user.currentActivityStatus == "started" ||
                         user.currentActivityStatus == "rejected"
                     ? WidgetUtil().getTextFieldWidget(
                         "Social Medial Post Link",
@@ -242,7 +247,7 @@ class _AttemptActivityScreenState extends State<AttemptActivityScreen>
                               StringsResource.done,
                               textScaleFactor: 1.5,
                             )),
-                        onPressed: () => moveToPreviousScreen(false)),
+                        onPressed: () => moveToPreviousScreen(true)),
                   ),
                 ),
               ],
@@ -260,8 +265,10 @@ class _AttemptActivityScreenState extends State<AttemptActivityScreen>
         user.currentActivityStartTime,
         "",
         "pending",
+        activity.description,
         activity.points,
-        activity.timeAllocationPoints);
+        activity.timeAllocationPoints,
+        activity.hourAllocation);
 
     _submissionDataPresenter.setSubmission(submission);
   }

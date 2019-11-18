@@ -41,8 +41,8 @@ class _ChallengesScreenState extends State<ChallengesScreen>
   }
 
   Widget getChallengesListView() {
-    List challengeStatusList =
-        StringsUtil.getDelimitedList(_signedInUser.activityStatus);
+    List <String> challengeStatusList =
+    StringsUtil.getDelimitedList(_signedInUser.challengeStatus);
 
     return ListView.builder(
         itemCount: _challenges.length,
@@ -54,7 +54,7 @@ class _ChallengesScreenState extends State<ChallengesScreen>
               color: Colors.transparent,
               elevation: 0,
               child: WidgetUtil.getChallengeItem(
-                  _challenges[position], challengeStatusList, () {
+                  _challenges[position], challengeStatusList[position], () {
                 if (_challenges[position].id !=
                         _signedInUser.currentChallengeID &&
                     int.parse(_signedInUser.currentChallengeID) <

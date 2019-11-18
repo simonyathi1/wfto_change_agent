@@ -8,6 +8,7 @@ pod 'Firebase/Analytics'
 pod 'Firebase/Auth'
 pod 'Firebase/Firestore'
 pod 'FirebaseFirestoreSwift'
+pod 'FirebaseCore'
 
 project 'Runner', {
   'Debug' => :debug,

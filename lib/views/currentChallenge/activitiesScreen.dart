@@ -162,7 +162,7 @@ class _ActivitiesScreenState extends State<ActivitiesScreen>
 
   String getTextAreaViewText() {
     List challengeStatusList =
-        StringsUtil.getDelimitedList(_signedInUser.activityStatus);
+    StringsUtil.getDelimitedList(_signedInUser.challengeStatus);
     int index = int.parse(challenge.id) - 1;
     return challengeStatusList[index] == "complete"
         ? "Challenge already complete"
@@ -175,7 +175,7 @@ class _ActivitiesScreenState extends State<ActivitiesScreen>
 
   Color getSafeAreaColor() {
     List challengeStatusList =
-        StringsUtil.getDelimitedList(_signedInUser.activityStatus);
+    StringsUtil.getDelimitedList(_signedInUser.challengeStatus);
     int index = int.parse(challenge.id) - 1;
     return challengeStatusList[index] == "complete"
         ? Colors.green
@@ -183,7 +183,7 @@ class _ActivitiesScreenState extends State<ActivitiesScreen>
             ? Colors.yellow
             : challengeStatusList[index] == "rejected"
                 ? Colors.red
-                : Colors.white.withOpacity(0.4);
+        : Colors.white;
   }
 
   modeSelectionChanged(ActivityValue value) {

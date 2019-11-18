@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:wfto_change_agent/enums/Enums.dart';
 import 'package:wfto_change_agent/models/activity.dart';
 import 'package:wfto_change_agent/models/challenge.dart';
+import 'package:wfto_change_agent/models/submission.dart';
 import 'package:wfto_change_agent/models/user.dart';
 import 'package:wfto_change_agent/reources/dimens.dart';
 import 'package:wfto_change_agent/reources/strings_resource.dart';
+import 'package:wfto_change_agent/utils/strings_util.dart';
 
 import 'colors_util.dart';
 
@@ -46,10 +49,36 @@ class WidgetUtil {
         );
   }
 
-  static Widget getChallengeItem(
-      Challenge challenge, List<String> statuses, Function onClick) {
+  static Widget getChallengeItem(Challenge challenge, String challengeStatus,
+      Function onClick) {
 //    Widget speakerImage = WidgetUtil().getSpeakerImage(sermon);
-    Widget detailsView = WidgetUtil().challengeTileDetail(challenge, statuses);
+    Widget detailsView =
+    WidgetUtil().challengeTileDetail(challenge, challengeStatus);
+
+    return GestureDetector(
+      child: Container(
+        child: detailsView,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(const Radius.circular(20.0)),
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            stops: [0.1, 0.65, 1],
+            colors: [
+              ColorsUtil.primaryColorDark.withOpacity(0.2),
+              ColorsUtil.primaryColorDark.withOpacity(0.2),
+              ColorsUtil.primaryColorDark.withOpacity(0.2),
+            ],
+          ),
+        ),
+      ),
+      onTap: onClick,
+    );
+  }
+
+  static Widget getSubmissionItem(Submission submission, Function onClick) {
+//    Widget speakerImage = WidgetUtil().getSpeakerImage(sermon);
+    Widget detailsView = WidgetUtil().submissionTileDetail(submission);
 
     return GestureDetector(
       child: Container(
@@ -193,8 +222,7 @@ class WidgetUtil {
     }
   }
 
-  Widget challengeTileDetail(Challenge challenge, List<String> statuses) {
-    int index = int.parse(challenge.id) - 1;
+  Widget challengeTileDetail(Challenge challenge, String challengeStatus) {
     var title = Text(
       challenge.title,
       textAlign: TextAlign.left,
@@ -203,28 +231,32 @@ class WidgetUtil {
     );
 
     var activities = Text(
-      challenge.activityIDs.length.toString() + " Activities",
+      StringsUtil
+          .getDelimitedList(challenge.activityIDs.toString())
+          .length
+          .toString() +
+          " Activities",
       textAlign: TextAlign.left,
       style: TextStyle(color: Colors.white54, fontSize: 12.0),
     );
 
     var status = ListTile(
-      trailing: statuses[index] == "complete"
+      trailing: challengeStatus == "complete"
           ? Icon(
               Icons.check_circle,
               color: Colors.green,
             )
-          : statuses[index] == "pending"
+          : challengeStatus == "pending"
               ? Icon(
                   Icons.remove_circle,
                   color: Colors.yellow,
                 )
-              : statuses[index] == "rejected"
+          : challengeStatus == "rejected"
                   ? Icon(
                       Icons.cancel,
                       color: Colors.red,
                     )
-                  : statuses[index] == "locked"
+          : challengeStatus == "locked"
                       ? Icon(
                           Icons.lock,
                           color: Colors.grey,
@@ -240,6 +272,55 @@ class WidgetUtil {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[status, title, activities],
+        ));
+  }
+
+  Widget submissionTileDetail(Submission submission) {
+    var title = Text(
+      submission.title,
+      textAlign: TextAlign.left,
+      style: TextStyle(
+          color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16.0),
+    );
+
+    var submittedMaterial = Text(
+      submission.submittedMaterial,
+      textAlign: TextAlign.left,
+      style: TextStyle(color: Colors.white54, fontSize: 12.0),
+    );
+
+    var status = ListTile(
+      trailing: submission.submissionStatus == "approved"
+          ? Icon(
+        Icons.check_circle,
+        color: Colors.green,
+      )
+          : submission.submissionStatus == "pending"
+          ? Icon(
+        Icons.remove_circle,
+        color: Colors.yellow,
+      )
+          : submission.submissionStatus == "rejected"
+          ? Icon(
+        Icons.cancel,
+        color: Colors.red,
+      )
+          : submission.submissionStatus == "locked"
+          ? Icon(
+        Icons.lock,
+        color: Colors.grey,
+      )
+          : Icon(
+        Icons.lock_open,
+        color: Colors.white,
+      ),
+    );
+    return Padding(
+        padding:
+        EdgeInsets.only(left: Dimens.baseMargin, bottom: Dimens.baseMargin),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[status, title, submittedMaterial],
         ));
   }
 
@@ -535,16 +616,16 @@ class WidgetUtil {
 //  }
 
   static _launchURL(String url) async {
-//    if(url.isNotEmpty) {
-//      if (await canLaunch(url)) {
-//        await launch(url, forceWebView: true);
-//      } else {
-//        print("FU");
-//        throw 'Could not launch $url';
-//      }
-//    }else{
-//      //todo Navigate to connect screen
-//    }
+    if (url.isNotEmpty) {
+      if (await canLaunch(url)) {
+        await launch(url, forceWebView: true);
+      } else {
+        print("FU");
+        throw 'Could not launch $url';
+      }
+    } else {
+      //todo Navigate to connect screen
+    }
   }
 
   Widget getPaddedWidget(Widget widget) {
@@ -875,6 +956,11 @@ class WidgetUtil {
                     style: TextStyle(
                         color: Colors.white.withOpacity(0.6), fontSize: 18.0),
                   ),
+                  Text(
+                    activity.hourAllocation.toString() + " Hours",
+                    style: TextStyle(
+                        color: Colors.white.withOpacity(0.6), fontSize: 18.0),
+                  ),
                   SizedBox(height: 16.0),
 
                   Text(
@@ -920,6 +1006,140 @@ class WidgetUtil {
                     activity.activitySubmissionInstruction,
                     style: TextStyle(
                         color: Colors.white.withOpacity(0.6), fontSize: 18.0),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(const Radius.circular(32.0)),
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          stops: [0.1, 0.65, 1],
+          colors: [
+            ColorsUtil.primaryColorDark.withOpacity(0.6),
+            ColorsUtil.primaryColorDark.withOpacity(0.4),
+            ColorsUtil.primaryColorDark.withOpacity(0.0),
+          ],
+        ),
+      ),
+    );
+  }
+
+  static Widget getSubmissionDetailsWidget(Submission submission,
+      BuildContext context) {
+    return Container(
+      width: MediaQuery
+          .of(context)
+          .size
+          .width,
+      height: MediaQuery
+          .of(context)
+          .size
+          .height,
+      child: ListView(
+        children: <Widget>[
+          Container(
+            child: Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Column(
+                children: <Widget>[
+                  // SizedBox(height: 52.0),
+                  Text(submission.title,
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 22.0)),
+                  SizedBox(
+                    height: 6.0,
+                  ),
+                  Text(
+                    submission.points.toString() + " Points",
+                    style: TextStyle(
+                        color: Colors.white.withOpacity(0.6), fontSize: 18.0),
+                  ),
+                  SizedBox(height: 16.0),
+
+                  Text(
+                    "Descrption",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18.0),
+                  ),
+                  Text(
+                    submission.activityDescription,
+                    style: TextStyle(
+                        color: Colors.white.withOpacity(0.6), fontSize: 18.0),
+                  ),
+                  SizedBox(
+                    height: 6.0,
+                  ),
+                  Text(
+                    "Period",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18.0),
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Text(
+                        submission.startTime,
+                        style: TextStyle(
+                            color: Colors.white.withOpacity(0.6),
+                            fontSize: 18.0),
+                      ),
+                      Text(
+                        " - " + submission.finishTime,
+                        style: TextStyle(
+                            color: Colors.white.withOpacity(0.6),
+                            fontSize: 18.0),
+                      ),
+                    ],
+                  ),
+
+                  SizedBox(
+                    height: 6.0,
+                  ),
+                  Text(
+                    "Review",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18.0),
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Container(
+                          margin: EdgeInsets.all(16.0),
+                          child: RaisedButton(
+                            color: ColorsUtil.primaryColorDark,
+                            shape: RoundedRectangleBorder(
+                                side: BorderSide(
+                                    color: Theme
+                                        .of(context)
+                                        .accentColor),
+                                borderRadius: BorderRadius.circular(32)),
+                            textColor: ColorsUtil.colorAccent,
+                            child: Container(
+                                margin: EdgeInsets.symmetric(
+                                    vertical: Dimens.sideMargin),
+                                child: Text(
+                                  "View Social Media Post",
+                                )),
+                            onPressed: () {
+                              _launchURL(submission.submittedMaterial);
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),

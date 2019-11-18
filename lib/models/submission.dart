@@ -6,12 +6,14 @@ class Submission {
   String _submittedMaterial;
   String _userID;
   String _activityID;
+  String _activityDescription;
   String _challengeID;
   String _startTime;
   String _finishTime;
   String _submissionStatus;
   int _points;
   int _timeAllocationPoints;
+  int _timeAllocation;
 
   Submission(
       this._title,
@@ -22,8 +24,10 @@ class Submission {
       this._startTime,
       this._finishTime,
       this._submissionStatus,
+      this._activityDescription,
       this._points,
-      this._timeAllocationPoints);
+      this._timeAllocationPoints,
+      this._timeAllocation);
 
   Submission.withID(
       this._id,
@@ -35,8 +39,10 @@ class Submission {
       this._startTime,
       this._finishTime,
       this._submissionStatus,
+      this._activityDescription,
       this._points,
-      this._timeAllocationPoints);
+      this._timeAllocationPoints,
+      this._timeAllocation);
 
   Map<String, dynamic> toMap() {
     var map = Map<String, dynamic>();
@@ -53,8 +59,10 @@ class Submission {
     map["start_time"] = _startTime;
     map["finish_time"] = _finishTime;
     map["submission_status"] = _submissionStatus;
+    map["activity_description"] = _activityDescription;
     map["points"] = _points;
     map["time_allocation_points"] = _timeAllocationPoints;
+    map["time_allocation"] = _timeAllocation;
 
     return map;
   }
@@ -69,8 +77,10 @@ class Submission {
     this._startTime = map["start_time"];
     this._finishTime = map["finish_time"];
     this._submissionStatus = map["submission_status"];
+    this._activityDescription = map["activity_description"];
     this._points = map["points"];
     this._timeAllocationPoints = map["time_allocation_points"];
+    this._timeAllocation = map["time_allocation"];
   }
 
   Submission.fromSnapshot(DocumentSnapshot snapShot)
@@ -83,7 +93,9 @@ class Submission {
         this._startTime = snapShot["start_time"],
         this._finishTime = snapShot["finish_time"],
         this._submissionStatus = snapShot["submission_status"],
+        this._activityDescription = snapShot["activity_description"],
         this._timeAllocationPoints = snapShot["time_allocation_points"],
+        this._timeAllocation = snapShot["time_allocation"],
         this._points = snapShot["points"];
 
   String get id => _id;
@@ -107,6 +119,18 @@ class Submission {
   int get timeAllocationPoints => _timeAllocationPoints;
 
   String get submissionStatus => _submissionStatus;
+
+  String get activityDescription => _activityDescription;
+
+  int get timeAllocation => _timeAllocation;
+
+  set timeAllocation(int value) {
+    _timeAllocation = value;
+  }
+
+  set activityDescription(String value) {
+    _activityDescription = value;
+  }
 
   set points(int value) {
     _points = value;

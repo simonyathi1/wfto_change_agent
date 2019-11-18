@@ -30,7 +30,7 @@ class DatabaseHelper {
   String totalPoints = "points";
   String userEmail = "user_email";
   String activitiesDone = "activities_done";
-  String activityStatus = "activity_status";
+  String challengeStatus = "challenge_status";
   String currentActivityStartTime = "current_activity_start_time";
   String currentActivitySubmissionTime = "current_activity_submission_time";
 
@@ -58,6 +58,8 @@ class DatabaseHelper {
   String finishTime = "finish_time";
   String submissionStatus = "submission_status";
   String submissionTimeAllocationPoints = "time_allocation_points";
+  String submissionTimeAllocation = "time_allocation";
+  String activityDescription = "activity_description";
   String submissionPoints = "points";
 
   DatabaseHelper._createInstance();
@@ -88,7 +90,7 @@ class DatabaseHelper {
 
   void _createDB(Database db, int newVersion) async {
     await db.execute("CREATE TABLE $userTable($colId TEXT, $name TEXT,"
-        "$currentLevel TEXT,$currentActivityID,$currentActivity TEXT,$currentChallengeID TEXT,$currentActivityStatus TEXT,$photoUrl TEXT, $totalPoints INTEGER,$userEmail TEXT,$activitiesDone TEXT,$currentActivityStartTime TEXT,$currentActivitySubmissionTime TEXT,$activityStatus TEXT)");
+        "$currentLevel TEXT,$currentActivityID,$currentActivity TEXT,$currentChallengeID TEXT,$currentActivityStatus TEXT,$photoUrl TEXT, $totalPoints INTEGER,$userEmail TEXT,$activitiesDone TEXT,$currentActivityStartTime TEXT,$currentActivitySubmissionTime TEXT,$challengeStatus TEXT)");
 
     await db.execute(
         "CREATE TABLE $challengeTable($colId TEXT, $title TEXT, $activityIDs TEXT)");
@@ -100,8 +102,8 @@ class DatabaseHelper {
 
     await db.execute(
         "CREATE TABLE $submissionTable($colId TEXT, $submissionTitle TEXT, $submittedMaterial TEXT,"
-        "$userID TEXT, $activityID TEXT, $challengeID TEXT,$startTime TEXT, $finishTime TEXT,$submissionStatus TEXT,"
-        "$points INTEGER, $timeAllocationPoints INTEGER)");
+            "$userID TEXT, $activityID TEXT, $challengeID TEXT,$startTime TEXT, $finishTime TEXT,$submissionStatus TEXT,$activityDescription TEXT,"
+            "$points INTEGER, $submissionTimeAllocation INTEGER, $submissionTimeAllocationPoints INTEGER)");
   }
 
   ///*************************************Number table

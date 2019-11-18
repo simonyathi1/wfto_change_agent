@@ -15,6 +15,10 @@ class StringsResource {
 
   static String logout = "Logout";
 
+  static String adminUserID = "105150078878379024117";
+
+  static String submissions = "Submissions";
+
   // ignore: non_constant_identifier_names
   static String get about_us_description =>
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Venenatis urna cursus eget nunc scelerisque viverra mauris in. Ut enim blandit volutpat maecenas volutpat. Nisl condimentum id venenatis a condimentum. Elit eget gravida cum sociis natoque penatibus. Platea dictumst vestibulum rhoncus est. Scelerisque viverra mauris in aliquam sem fringilla ut. Tortor posuere ac ut consequat. Aliquam ut porttitor leo a diam sollicitudin tempor id. Et leo duis ut diam quam nulla porttitor. Sit amet purus gravida quis. Volutpat maecenas volutpat blandit aliquam etiam erat velit. Dui ut ornare lectus sit amet. Mauris ultrices eros in cursus turpis massa tincidunt. Ac ut consequat semper viverra nam. Integer vitae justo eget magna fermentum iaculis eu non diam. Augue interdum velit euismod in." +

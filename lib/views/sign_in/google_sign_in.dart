@@ -7,6 +7,8 @@ import 'package:wfto_change_agent/database/i_user_view.dart';
 import 'package:wfto_change_agent/database/user_data_presenter.dart';
 import 'package:wfto_change_agent/models/provider.dart';
 import 'package:wfto_change_agent/models/user.dart';
+import 'package:wfto_change_agent/reources/strings_resource.dart';
+import 'package:wfto_change_agent/views/admin_view/submissionsListScreen.dart';
 import 'package:wfto_change_agent/views/base/base_ui.dart';
 
 class GoogleSignInScreen extends StatefulWidget {
@@ -192,11 +194,17 @@ class GoogleSignInScreenState extends State<GoogleSignInScreen>
   }
 
   navigateHome(User user) {
+    MaterialPageRoute screen = user.id == StringsResource.adminUserID
+        ? MaterialPageRoute(
+      builder: (context) => new SubmissionsListScreen(user),
+    )
+        : MaterialPageRoute(
+      builder: (context) => new BaseUI(user),
+    );
+
     Navigator.pushReplacement(
       context,
-      new MaterialPageRoute(
-        builder: (context) => new BaseUI(user),
-      ),
+      screen,
     );
   }
 
@@ -208,7 +216,7 @@ class GoogleSignInScreenState extends State<GoogleSignInScreen>
   @override
   void setUser(User user) {
 //    setState(() {
-      navigateHome(user);
+    navigateHome(user);
 //      hasLoaded = true;
 //    });
   }
