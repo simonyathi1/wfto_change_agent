@@ -15,11 +15,19 @@
       },
       "oauth_client": [
         {
-          "client_id": "546003744959-8jt7vng7qp5n61mr06n8p2khp2a27jfo.apps.googleusercontent.com",
+          "client_id": "546003744959-s1lr0829sf3ubtfgeqn65pvrkaru8oqk.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "za.co.fidelitech.wfto_change_agent",
             "certificate_hash": "2df8880835ceafc8206dbdaad7d027654e308547"
+          }
+        },
+        {
+          "client_id": "546003744959-d2kpdd448jbuovrvng3evi7qc420h5pc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "za.co.fidelitech.wfto_change_agent",
+            "certificate_hash": "cae16cdb7393b8c4dcfa49ba49a449bb240ffffb"
           }
         },
         {
@@ -36,8 +44,15 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "546003744959-cog84t927k1lsav1ddl3t00cvt0aq117.apps.googleusercontent.com",
+              "client_id": "546003744959-o2hpcsasovpg8mhqemth120bmfd3gfoq.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "546003744959-4he7f0u2eh7qnusftcdn9rct1uujuslo.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "za.co.fidelitech.wftoChangeAgent"
+              }
             }
           ]
         }
